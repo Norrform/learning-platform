@@ -15,13 +15,17 @@ No build tools or dependencies are required. Clone or download this repository, 
 - Discover page with search, topic categories, and save controls
 - Lesson experience with Read, Practice, simulated AI tutor, and personal notes tabs
 - Flashcards with three sample decks, flip controls, and self-rating
+- Practice centre with quick quizzes, free recall, and teach-back reflections
+- Projects space for turning learning goals into practical work, with editable stages
+- Study planner with weekly sessions, completion tracking, and local persistence
+- Insights dashboard with activity, consistency, and concept-confidence visualizations
 - Study groups with join / leave interactions and create-group flow
 - Community feed with sample posts, likes, and a local post composer
 - Saved resources collection
 - Notes area with editable notes stored in browser local storage
 - Settings preferences
 - Responsive desktop, tablet, and mobile layouts
-- Demo interactions and local persistence for notes, saved resources, joined groups, likes, and custom paths
+- Demo interactions and local persistence for notes, saved resources, joined groups, likes, custom paths, practice history, study sessions, and projects
 
 ## Important limitations
 This is a front-end concept demo, not a production learning service.
