@@ -21,14 +21,18 @@
       <button class="nav-item" data-page="my-learning"><span class="nav-icon">▤</span>My learning<span class="nav-count">3</span></button>
       <button class="nav-item" data-page="discover"><span class="nav-icon">⌕</span>Discover</button>
       <button class="nav-item" data-page="flashcards"><span class="nav-icon">▧</span>Flashcards</button>
+      <button class="nav-item" data-page="practice"><span class="nav-icon">✓</span>Practice</button>
+      <button class="nav-item" data-page="projects"><span class="nav-icon">◇</span>Projects</button>
     </div>
     <div class="nav-group"><div class="nav-label">TOGETHER</div>
       <button class="nav-item" data-page="groups"><span class="nav-icon">♧</span>Study groups<span class="nav-pill">NEW</span></button>
       <button class="nav-item" data-page="community"><span class="nav-icon">◎</span>Community</button>
+      <button class="nav-item" data-page="schedule"><span class="nav-icon">▦</span>Study planner</button>
     </div>
     <div class="nav-group"><div class="nav-label">YOUR SPACE</div>
       <button class="nav-item" data-page="saved"><span class="nav-icon">♡</span>Saved resources</button>
       <button class="nav-item" data-page="notes"><span class="nav-icon">▨</span>My notes</button>
+      <button class="nav-item" data-page="insights"><span class="nav-icon">↗</span>Insights</button>
     </div>
     <div class="sidebar-bottom">
       <div class="upgrade-card"><div class="upgrade-icon">✦</div><strong>Make more progress</strong><p>Explore what a focused learning routine can do.</p><button data-action="upgrade">Explore Learnly Plus <span>→</span></button></div>
@@ -72,6 +76,40 @@
       <section class="page" id="page-saved"><div class="page-title-row"><div><div class="eyebrow">YOUR PERSONAL LIBRARY</div><h1>Saved resources</h1><p class="subheading">Keep useful ideas close by for another day.</p></div></div><div class="surface-card"><div class="card-heading"><div><h3>Your collection</h3><p>Resources and learning paths you've saved.</p></div><span class="muted" id="savedCount">3 saved</span></div><div id="savedList"></div></div></section>
 
       <section class="page" id="page-notes"><div class="page-title-row"><div><div class="eyebrow">THINK IT THROUGH</div><h1>My notes</h1><p class="subheading">Your thoughts, questions, and little discoveries in one place.</p></div><button class="button button-primary" data-action="new-note">＋ New note</button></div><div class="notes-layout"><div class="surface-card notes-list"><div class="card-heading"><h3>All notes</h3><span class="muted" id="noteCount">2 notes</span></div><div id="noteItems"></div></div><div class="surface-card note-editor"><input id="noteTitle" class="note-title-input" placeholder="Untitled note"><div class="note-meta" id="noteMeta">PERSONAL NOTE · SAVES IN THIS BROWSER</div><textarea id="noteBody" placeholder="Start writing your thoughts..."></textarea><div class="note-footer"><span>✦ &nbsp; Your notes stay in this browser in this demo.</span><button class="button button-primary button-small" id="saveNote">Save note</button></div></div></div></section>
+
+
+      <section class="page" id="page-practice">
+        <div class="page-title-row"><div><div class="eyebrow">MAKE KNOWLEDGE STICK</div><h1>Practice centre</h1><p class="subheading">Choose a way to check what you understand, then use the results to decide what to revisit.</p></div><span class="practice-streak">✦ Consistency over perfection</span></div>
+        <div class="practice-hero"><div><span class="eyebrow light">YOUR NEXT SMALL WIN</span><h2>Remember more<br>by doing more.</h2><p>Mix quick recall, short quizzes, and explaining ideas in your own words.</p><button class="button button-white" data-practice-start="recall">Start a 5-minute review →</button></div><div class="practice-orbit">↻</div></div>
+        <div class="section-heading"><div><h2>Pick a practice mode</h2><p>Different activities reveal different kinds of understanding.</p></div></div>
+        <div class="practice-mode-grid">
+          <button class="practice-mode-card" data-practice-start="quiz"><span class="mode-icon purple">☷</span><b>Quick quiz</b><small>Test understanding with a few questions.</small><span class="mode-link">Start quiz →</span></button>
+          <button class="practice-mode-card" data-practice-start="recall"><span class="mode-icon green">↻</span><b>Free recall</b><small>Write down what you remember without looking.</small><span class="mode-link">Start recall →</span></button>
+          <button class="practice-mode-card" data-practice-start="explain"><span class="mode-icon orange">✎</span><b>Explain it simply</b><small>Teach an idea in your own words.</small><span class="mode-link">Start explaining →</span></button>
+          <button class="practice-mode-card" data-page-link="flashcards"><span class="mode-icon blue">▧</span><b>Flashcard review</b><small>Strengthen facts and key definitions.</small><span class="mode-link">Open flashcards →</span></button>
+        </div>
+        <div class="practice-columns"><section class="surface-card"><div class="card-heading"><div><h3>Recent practice</h3><p>Your activity in this browser demo.</p></div></div><div id="practiceHistory"></div></section><section class="surface-card"><div class="card-heading"><div><h3>What makes practice useful?</h3></div></div><div class="practice-tip-list"><p><b>1. Try before checking.</b><br><span>Give your memory a chance to work before opening the answer.</span></p><p><b>2. Learn from mistakes.</b><br><span>Incorrect answers help identify what needs another explanation.</span></p><p><b>3. Return later.</b><br><span>Short reviews spread over time can strengthen long-term recall.</span></p></div></section></div>
+      </section>
+
+      <section class="page" id="page-projects">
+        <div class="page-title-row"><div><div class="eyebrow">LEARN BY MAKING</div><h1>Projects & practice work</h1><p class="subheading">Turn what you're learning into something you can actually use.</p></div><button class="button button-primary" data-action="new-project">＋ Add a project</button></div>
+        <div class="project-intro"><div><span class="eyebrow light">FROM KNOWING TO DOING</span><h2>Build something<br>with what you learn.</h2><p>Projects help connect concepts and reveal where you need more practice.</p></div><div class="project-stamp">MAKE<br>IT<br>REAL ✦</div></div>
+        <div class="section-heading"><div><h2>Your project space</h2><p>Track ideas, drafts, and finished work.</p></div><span class="muted" id="projectCount">0 projects</span></div><div class="project-grid" id="projectGrid"></div>
+      </section>
+
+      <section class="page" id="page-schedule">
+        <div class="page-title-row"><div><div class="eyebrow">A ROUTINE THAT FITS</div><h1>Study planner</h1><p class="subheading">Make a realistic plan, then adjust it when life changes.</p></div><button class="button button-primary" data-action="add-study-task">＋ Add study session</button></div>
+        <div class="planner-summary"><div><span class="eyebrow">THIS WEEK</span><h2 id="plannerProgress">0 of 5 sessions complete</h2><p>Small, consistent sessions are easier to keep than a perfect schedule.</p></div><div class="planner-progress-ring" id="plannerRing"><strong id="plannerPercent">0%</strong></div></div>
+        <div class="planner-week" id="plannerWeek"></div>
+        <div class="surface-card planner-task-card"><div class="card-heading"><div><h3>Your study sessions</h3><p>Tick off sessions as you complete them.</p></div><span class="muted" id="taskCount">5 planned</span></div><div id="plannerTasks"></div></div>
+      </section>
+
+      <section class="page" id="page-insights">
+        <div class="page-title-row"><div><div class="eyebrow">NOTICE YOUR PROGRESS</div><h1>Learning insights</h1><p class="subheading">Progress is more than time spent. Look at what you can explain and apply.</p></div><span class="insight-period">DEMO OVERVIEW · 4 WEEKS</span></div>
+        <div class="insight-stat-grid"><article class="stat-card"><div class="stat-label">Study time</div><div class="stat-value">8h 40m</div><div class="stat-foot positive">↗ 12% <span>sample trend</span></div></article><article class="stat-card"><div class="stat-label">Practice activities</div><div class="stat-value" id="insightPracticeCount">0</div><div class="stat-foot">Completed in this demo</div></article><article class="stat-card"><div class="stat-label">Learning paths</div><div class="stat-value" id="insightPathCount">3</div><div class="stat-foot">Active and completed</div></article><article class="stat-card"><div class="stat-label">Study consistency</div><div class="stat-value" id="insightConsistency">0%</div><div class="stat-foot">Planned sessions completed</div></article></div>
+        <div class="insight-columns"><section class="surface-card"><div class="card-heading"><div><h3>Study activity</h3><p>Illustrative weekly activity.</p></div></div><div class="activity-chart" id="activityChart"></div></section><section class="surface-card"><div class="card-heading"><div><h3>Concept confidence</h3><p>Sample self-assessed mastery levels.</p></div></div><div id="masteryList"></div></section></div>
+        <section class="surface-card insight-advice"><div class="card-heading"><div><h3>Your next useful step</h3><span class="recommendation-tag">SUGGESTED</span></div></div><p id="insightRecommendation">Try a short practice session on a topic you recently studied.</p><button class="button button-primary button-small" data-page-link="practice">Go to practice →</button></section>
+      </section>
 
       <section class="page" id="page-settings"><div class="page-title-row"><div><div class="eyebrow">MAKE IT YOURS</div><h1>Settings</h1><p class="subheading">Shape your learning space around what works for you.</p></div></div><div class="settings-layout"><aside class="settings-nav"><button class="selected">Preferences</button><button data-action="profile-settings">Profile</button><button data-action="privacy-settings">Privacy</button><button data-action="plan-settings">Plan & billing</button></aside><div class="surface-card settings-content"><h3>Learning preferences</h3><p>These choices help shape your suggested learning experience.</p><div class="setting-row"><div><b>Daily learning goal</b><small>How much time would you like to spend learning?</small></div><select class="text-input compact-select" id="dailyGoal"><option>15 minutes</option><option selected>30 minutes</option><option>1 hour</option><option>2 hours</option></select></div><div class="setting-row"><div><b>Learning style suggestions</b><small>Let Learnly suggest different ways to explore a topic.</small></div><label class="switch"><input type="checkbox" id="styleSuggestions" checked><span></span></label></div><div class="setting-row"><div><b>Gentle reminders</b><small>Show a reminder in your learning space.</small></div><label class="switch"><input type="checkbox" id="reminders"><span></span></label></div><div class="setting-row"><div><b>Show progress insights</b><small>See what you're improving and what to revisit.</small></div><label class="switch"><input type="checkbox" id="progressInsights" checked><span></span></label></div><div class="setting-row"><div><b>Content difficulty</b><small>How challenging should suggested activities feel?</small></div><select class="text-input compact-select"><option>Balanced</option><option>Gentle</option><option>Challenging</option></select></div><button class="button button-primary" data-action="save-settings">Save preferences</button></div></div></section>
     </div>
