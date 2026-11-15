@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learnly — Learn anything, your way</title>
+<style>
+:root{--bg:#f6f7fb;--surface:#fff;--ink:#172033;--muted:#788196;--line:#e8eaf1;--purple:#6c5ce7;--purple2:#8b7cf6;--mint:#dff7ef;--blue:#e9f0ff;--orange:#fff0df;--shadow:0 12px 35px rgba(28,35,67,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input{font:inherit}button{cursor:pointer;border:0}.app{min-height:100vh;display:grid;grid-template-columns:245px 1fr}
+.sidebar{background:#fff;border-right:1px solid var(--line);padding:27px 18px;display:flex;flex-direction:column;gap:30px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:21px;letter-spacing:-.7px;padding:0 10px}.brandmark{width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,var(--purple),#a99cff);display:grid;place-items:center;color:white;font-size:19px}
+.nav-label{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;color:#a0a7b7;font-weight:800;padding:0 12px;margin-bottom:9px}.nav{display:grid;gap:5px}.nav button{background:transparent;color:#778096;text-align:left;padding:11px 12px;border-radius:11px;display:flex;gap:12px;align-items:center;font-weight:600}.nav button.active,.nav button:hover{background:#f0edff;color:var(--purple)}.nav .ico{width:19px;text-align:center;font-size:17px}.side-bottom{margin-top:auto;background:#f5f3ff;border-radius:16px;padding:16px}.side-bottom strong{display:block;font-size:13px;margin-bottom:5px}.side-bottom p{font-size:12px;color:var(--muted);margin:0 0 12px}.tiny-btn{background:#fff;color:var(--purple);border:1px solid #e5e0ff;border-radius:9px;padding:8px 10px;font-size:12px;font-weight:700}
+main{padding:30px clamp(20px,4vw,58px) 60px;max-width:1500px;width:100%;margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:30px}.crumb{color:var(--muted);font-size:13px}.profile{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700}.avatar{width:34px;height:34px;border-radius:50%;background:#ffe4d3;color:#a45d35;display:grid;place-items:center;font-weight:800}
+h1{font-size:clamp(27px,3vw,36px);letter-spacing:-1.2px;margin:0 0 7px}.subtitle{color:var(--muted);margin:0}.welcome-row{display:flex;justify-content:space-between;align-items:end;margin-bottom:25px}.streak{background:#fff;border:1px solid var(--line);border-radius:12px;padding:9px 13px;font-size:12px;font-weight:700}
+.hero{background:linear-gradient(115deg,#262344,#443b75 60%,#6558a8);border-radius:22px;padding:27px 30px;color:white;display:grid;grid-template-columns:1.25fr .75fr;gap:25px;overflow:hidden;position:relative;box-shadow:var(--shadow);margin-bottom:24px}.hero:after{content:"";position:absolute;width:260px;height:260px;border:1px solid #ffffff20;border-radius:50%;right:7%;top:-120px;box-shadow:0 0 0 28px #ffffff08,0 0 0 58px #ffffff06}.eyebrow{font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#c9c2ff;font-weight:800}.hero h2{font-size:25px;line-height:1.2;letter-spacing:-.6px;margin:10px 0}.hero p{color:#d5d1e9;font-size:13px;max-width:490px;margin:0 0 18px}.primary{background:#fff;color:#4e43a5;padding:11px 16px;border-radius:10px;font-weight:800;font-size:12px}.hero-art{position:relative;z-index:1;display:flex;align-items:center;justify-content:center}.orbit{width:155px;height:155px;border:1px solid #ffffff42;border-radius:50%;display:grid;place-items:center;position:relative}.orbit:before,.orbit:after{content:"";position:absolute;border:1px solid #ffffff2c;border-radius:50%;inset:17px}.orbit:after{inset:36px}.book{width:65px;height:75px;background:linear-gradient(135deg,#f7dcae,#ffb878);border-radius:8px 13px 13px 8px;box-shadow:9px 8px 0 #252044;display:grid;place-items:center;color:#58416a;font-size:28px;transform:rotate(-8deg)}
+.grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,.8fr);gap:22px}.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:21px;box-shadow:0 4px 18px rgba(28,35,67,.025)}.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.panel h3{font-size:16px;margin:0;letter-spacing:-.3px}.muted{color:var(--muted);font-size:12px}.link{background:none;color:var(--purple);font-size:12px;font-weight:800}
+.course-card{border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:11px;display:grid;grid-template-columns:45px 1fr auto;gap:13px;align-items:center}.course-icon{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;font-size:21px}.lav{background:#eeeaff}.mint{background:var(--mint)}.peach{background:var(--orange)}.course-card h4{margin:0 0 3px;font-size:13px}.course-card p{margin:0;color:var(--muted);font-size:11px}.progress{height:6px;background:#f0f1f5;border-radius:20px;margin-top:9px;overflow:hidden}.progress span{height:100%;display:block;background:var(--purple);border-radius:20px}.continue{background:#f2efff;color:var(--purple);border-radius:9px;padding:8px 10px;font-size:11px;font-weight:800}
+.rightcol{display:grid;gap:18px;align-content:start}.goal-box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}.goal-box h3{margin:0 0 6px;font-size:16px}.goal-box p{margin:0 0 15px;color:var(--muted);font-size:12px}.field{display:grid;gap:6px;margin-bottom:11px}.field label{font-size:11px;font-weight:800;color:#555f75}.field input,.field select{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:9px;background:#fbfbfd;color:var(--ink);outline:none;font-size:12px}.field input:focus,.field select:focus{border-color:var(--purple)}.full{width:100%;background:var(--purple);color:#fff;border-radius:10px;padding:11px;font-size:12px;font-weight:800}.tip{background:#eef8f5;border-radius:15px;padding:16px;display:flex;gap:12px}.tip .bulb{font-size:20px}.tip strong{font-size:12px}.tip p{font-size:11px;color:#657b75;margin:4px 0 0}
+.modal-backdrop{position:fixed;inset:0;background:#17152b80;display:none;align-items:center;justify-content:center;padding:20px;z-index:5}.modal-backdrop.show{display:flex}.modal{background:white;border-radius:20px;max-width:620px;width:100%;padding:25px;box-shadow:0 25px 80px #15132b55;max-height:90vh;overflow:auto}.modal-top{display:flex;justify-content:space-between;align-items:center}.close{background:#f2f3f7;border-radius:9px;width:32px;height:32px;font-size:18px}.modal h2{font-size:23px;margin:15px 0 5px}.modal p{color:var(--muted);font-size:13px}.module-list{display:grid;gap:9px;margin:20px 0}.module{border:1px solid var(--line);border-radius:12px;padding:13px;display:flex;align-items:center;gap:12px}.module .num{width:30px;height:30px;border-radius:9px;background:#f0edff;color:var(--purple);display:grid;place-items:center;font-size:12px;font-weight:800}.module strong{font-size:12px;display:block}.module small{color:var(--muted);font-size:11px}.module button{margin-left:auto;background:#f4f2ff;color:var(--purple);border-radius:8px;padding:7px 9px;font-size:10px;font-weight:800}
+.lesson-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0}.lesson-tabs button{background:#f3f4f8;color:#687187;padding:8px 11px;border-radius:9px;font-size:11px;font-weight:700}.lesson-tabs button.active{background:#eeeaff;color:var(--purple)}.lesson-content{background:#f8f8fc;border-radius:13px;padding:17px;font-size:13px}.lesson-content code{background:#eeebff;color:#5547b2;padding:2px 5px;border-radius:4px}.lesson-content pre{background:#252344;color:#fff;padding:13px;border-radius:10px;overflow:auto}.toast{position:fixed;bottom:20px;right:20px;background:#252344;color:white;padding:12px 16px;border-radius:10px;font-size:12px;opacity:0;transform:translateY(8px);transition:.2s;z-index:8}.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:900px){.app{grid-template-columns:72px 1fr}.sidebar{padding:22px 10px}.brand{padding:0;justify-content:center}.brand span,.nav-label,.nav button .navtext,.side-bottom{display:none}.nav button{justify-content:center;padding:12px}.grid{grid-template-columns:1fr}.rightcol{grid-template-columns:1fr 1fr}.hero{grid-template-columns:1fr .45fr}}
+@media(max-width:600px){.app{display:block}.sidebar{height:62px;position:sticky;top:0;z-index:3;border-right:0;border-bottom:1px solid var(--line);padding:9px 14px;flex-direction:row;align-items:center;justify-content:space-between}.brand{justify-content:flex-start}.brand span{display:inline}.nav{display:flex}.nav button{padding:8px}.nav button:nth-child(n+3){display:none}.nav .navtext{display:none}.sidebar>div:first-of-type{display:none}.side-bottom{display:none}main{padding:22px 15px}.topbar{margin-bottom:20px}.welcome-row{align-items:start;gap:12px;flex-direction:column}.hero{grid-template-columns:1fr;padding:23px}.hero-art{display:none}.rightcol{grid-template-columns:1fr}.course-card{grid-template-columns:40px 1fr}.course-card .continue{grid-column:2;justify-self:start}.panel{padding:16px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="brandmark">✦</div><span>learnly</span></div>
+  <div>
+    <div class="nav-label">Workspace</div>
+    <nav class="nav">
+      <button class="active" data-page="overview"><span class="ico">⌂</span><span class="navtext">Overview</span></button>
+      <button data-page="my-learning"><span class="ico">▤</span><span class="navtext">My learning</span></button>
+      <button data-page="discover"><span class="ico">⌕</span><span class="navtext">Discover</span></button>
+      <button data-page="groups"><span class="ico">♧</span><span class="navtext">Study groups</span></button>
+    </nav>
+  </div>
+  <div>
+    <div class="nav-label">Personal</div>
+    <nav class="nav">
+      <button data-page="saved"><span class="ico">♡</span><span class="navtext">Saved resources</span></button>
+      <button data-page="settings"><span class="ico">⚙</span><span class="navtext">Settings</span></button>
+    </nav>
+  </div>
+  <div class="side-bottom"><strong>Make learning a habit</strong><p>A little progress every day adds up.</p><button class="tiny-btn" onclick="toast('Daily goal settings are coming soon.')">Set daily goal →</button></div>
+</aside>
+<main>
+  <div class="topbar"><div class="crumb">Workspace / <b>Overview</b></div><div class="profile"><span>Alex Morgan</span><div class="avatar">A</div></div></div>
+  <div class="welcome-row"><div><h1>Good evening, Alex <span style="font-size:25px">✦</span></h1><p class="subtitle">Ready to make a little progress today?</p></div><div class="streak">🔥 &nbsp; 4 day learning streak</div></div>
+  <section class="hero">
+    <div><div class="eyebrow">YOUR LEARNING, YOUR WAY</div><h2>Big goals start with<br>one small lesson.</h2><p>Learn something new, build real understanding, and let your learning path adapt as you grow.</p><button class="primary" onclick="document.getElementById('goal').focus()">＋ &nbsp; Start learning something</button></div>
+    <div class="hero-art"><div class="orbit"><div class="book">✦</div></div></div>
+  </section>
+  <div class="grid">
+    <section class="panel">
+      <div class="panel-head"><div><h3>Pick up where you left off</h3><div class="muted">Your active learning paths</div></div><button class="link" onclick="toast('All learning paths are shown here in the full product.')">View all →</button></div>
+      <div class="course-card"><div class="course-icon lav">⌘</div><div><h4>Python Programming</h4><p>Module 2 · Logic and decisions</p><div class="progress"><span style="width:38%"></span></div></div><button class="continue" onclick="openLesson('Python Programming','Logic and decisions')">Continue</button></div>
+      <div class="course-card"><div class="course-icon mint">🌱</div><div><h4>Introduction to Biology</h4><p>Module 1 · The foundations of life</p><div class="progress"><span style="width:18%;background:#31b58a"></span></div></div><button class="continue" onclick="openLesson('Introduction to Biology','The foundations of life')">Continue</button></div>
+      <div class="course-card"><div class="course-icon peach">◈</div><div><h4>Design Principles</h4><p>Module 3 · Color and composition</p><div class="progress"><span style="width:62%;background:#f0a34b"></span></div></div><button class="continue" onclick="openLesson('Design Principles','Color and composition')">Continue</button></div>
+    </section>
+    <div class="rightcol">
+      <section class="goal-box">
+        <h3>What do you want to learn?</h3><p>Tell us your goal. Your AI learning planner will map out a path.</p>
+        <div class="field"><label for="goal">LEARNING GOAL</label><input id="goal" placeholder="e.g. Learn web development"></div>
+        <div class="field"><label for="level">CURRENT LEVEL</label><select id="level"><option>Complete beginner</option><option>Some experience</option><option>Intermediate</option><option>Advanced</option></select></div>
+        <div class="field"><label for="time">TIME PER DAY</label><select id="time"><option>15 minutes</option><option selected>30 minutes</option><option>1 hour</option><option>2+ hours</option></select></div>
+        <button class="full" onclick="generateRoadmap()">Create my learning path →</button>
+      </section>
+      <div class="tip"><div class="bulb">💡</div><div><strong>A small learning tip</strong><p>Try explaining a concept in your own words. It helps reveal what you really understand.</p></div></div>
+    </div>
+  </div>
+</main>
+</div>
+
+<div class="modal-backdrop" id="roadmapModal" onclick="backdropClose(event,'roadmapModal')"><div class="modal">
+  <div class="modal-top"><span class="eyebrow" style="color:#796be4">YOUR PERSONALIZED PATH</span><button class="close" onclick="closeModal('roadmapModal')">×</button></div>
+  <h2 id="roadmapTitle">Your learning roadmap</h2><p id="roadmapDesc">A suggested path based on your goal and current level. You can customize it at any time.</p>
+  <div class="module-list" id="moduleList"></div>
+  <button class="full" onclick="openLesson(document.getElementById('roadmapTitle').textContent,'Getting started')">Start first module →</button>
+</div></div>
+
+<div class="modal-backdrop" id="lessonModal" onclick="backdropClose(event,'lessonModal')"><div class="modal">
+  <div class="modal-top"><span class="eyebrow" style="color:#796be4">LEARNING MODULE · DEMO</span><button class="close" onclick="closeModal('lessonModal')">×</button></div>
+  <h2 id="lessonTitle">Getting started</h2><p id="lessonSubtitle">A short introduction to your next topic.</p>
+  <div class="lesson-tabs"><button class="active" onclick="setTab(this,'read')">Read</button><button onclick="setTab(this,'practice')">Practice</button><button onclick="setTab(this,'ask')">Ask AI tutor</button></div>
+  <div class="lesson-content" id="lessonContent"><b>Welcome to your lesson.</b><p>This is a sample lesson view. In the real platform, the module generator will create content based on your learning goal, progress and trusted learning sources.</p><p>You'll be able to move between explanations, examples and activities without losing your place.</p></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px"><span class="muted">Demo content · Progress isn't saved</span><button class="continue" onclick="toast('Demo complete! In the real app, your progress will be saved.')">Mark as complete ✓</button></div>
+</div></div>
+<div class="toast" id="toast"></div>
+<script>
+const sampleModules=[
+ ['Foundations','Understand the essential building blocks'],
+ ['Core concepts','Learn the most important ideas and vocabulary'],
+ ['Guided practice','Apply what you have learned with examples'],
+ ['Build and apply','Use your knowledge in a small project']
+];
+function generateRoadmap(){
+ const goal=document.getElementById('goal').value.trim();
+ if(!goal){toast('Enter something you want to learn first.');document.getElementById('goal').focus();return}
+ const level=document.getElementById('level').value, time=document.getElementById('time').value;
+ document.getElementById('roadmapTitle').textContent=goal;
+ document.getElementById('roadmapDesc').textContent=\`Suggested starting path · \${level} · \${time} per day. This is sample demo logic, not a live AI-generated course.\`;
+ document.getElementById('moduleList').innerHTML=sampleModules.map((m,i)=>\`<div class="module"><div class="num">\${String(i+1).padStart(2,'0')}</div><div><strong>\${m[0]}</strong><small>\${m[1]}</small></div><button onclick="editModule(this)">Edit</button></div>\`).join('');
+ document.getElementById('roadmapModal').classList.add('show');
+}
+function editModule(btn){const title=btn.parentElement.querySelector('strong');const next=prompt('Rename this module:',title.textContent);if(next&&next.trim())title.textContent=next.trim()}
+function openLesson(course,topic){document.getElementById('lessonTitle').textContent=topic;document.getElementById('lessonSubtitle').textContent=course+' · Continue learning at your own pace.';document.getElementById('lessonModal').classList.add('show');setTab(document.querySelector('.lesson-tabs button'),'read')}
+function setTab(btn,tab){document.querySelectorAll('.lesson-tabs button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const box=document.getElementById('lessonContent');
+ if(tab==='read')box.innerHTML='<b>Start with the big idea</b><p>Every topic becomes easier when you understand its core idea first. This lesson would introduce the concept, explain why it matters, and build up with clear examples.</p><p><b>Example</b><br>Imagine learning a new skill one small step at a time. Each step gives you the foundation for the next.</p>';
+ if(tab==='practice')box.innerHTML='<b>Quick knowledge check</b><p>What is the best way to check whether you understand a new concept?</p><button class="tiny-btn" onclick="toast(\\'Good try — explain the idea in your own words to check understanding.\\')">A. Re-read the same paragraph</button> <button class="tiny-btn" onclick="toast(\\'Exactly! Retrieval practice helps test what you can recall.\\')">B. Try explaining it from memory</button>';
+ if(tab==='ask')box.innerHTML='<b>Ask your AI tutor</b><p>What would you like explained differently?</p><input id="tutorQuestion" placeholder="Ask a question..." style="width:100%;padding:11px;border:1px solid var(--line);border-radius:9px"><button class="full" style="margin-top:10px" onclick="toast(\\'AI tutor connection will be added in the next build phase.\\')">Ask tutor</button><p class="muted">Tutor responses in this demo are not connected to an AI model yet.</p>';
+}
+function closeModal(id){document.getElementById(id).classList.remove('show')}
+function backdropClose(e,id){if(e.target.id===id)closeModal(id)}
+let toastTimer;function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2600)}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');if(b.dataset.page!=='overview')toast(b.querySelector('.navtext').textContent+' is a preview section for a later version.')}))
+</script>
+</body>
+</html>
