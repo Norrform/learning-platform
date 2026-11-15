@@ -86,6 +86,7 @@ document.addEventListener('click',e=>{
  const action=e.target.closest('[data-action]');if(action){handleAction(action.dataset.action,action);return}
  const open=e.target.closest('[data-open-course]');if(open){openLesson(open.dataset.openCourse);return}
  const detail=e.target.closest('[data-path-detail]');if(detail){courseDetail(detail.dataset.pathDetail);return}
+ const lesson=e.target.closest('[data-lesson]');if(lesson){openLesson(lesson.dataset.lesson);return}
  const save=e.target.closest('[data-save]');if(save){const id=save.dataset.save;state.saved=state.saved.includes(id)?state.saved.filter(x=>x!==id):[...state.saved,id];saveState();renderOverview();renderDiscover();renderSaved();toast(state.saved.includes(id)?'Added to your saved resources.':'Removed from saved resources.');return}
  const start=e.target.closest('[data-start-catalog]');if(start){const c=getCourse(start.dataset.startCatalog);if(c){if(!allPaths().some(x=>x.id===c.id)){const path={...c,progress:0,modules:5,topic:'Getting started'};state.paths.push(path);saveState();}courseDetail(c.id)}return}
  const join=e.target.closest('[data-join]');if(join){const id=join.dataset.join;state.joined=state.joined.includes(id)?state.joined.filter(x=>x!==id):[...state.joined,id];saveState();renderGroups();toast(state.joined.includes(id)?'You joined the group in this demo.':'You left the group.');return}
