@@ -1,8 +1,8 @@
-# Learnly — Expanded Product Demo
+# Learnly — Public Landing Page + Learning Demo
 
 A responsive, multi-page front-end prototype for an adaptive learning platform.
 
-## Live demo
+## Live demo\n- Public landing page: https://learnly-learning-demo.vercel.app\n- Interactive learning workspace: https://learnly-learning-demo.vercel.app/app.html\n\n## Project structure\n- `index.html`, `landing.css`, `landing.js`: public marketing landing page\n- `app.html`, `style.css`, `script.js`: interactive learning workspace demo\n\n## Live demo
 https://learnly-learning-demo.vercel.app
 
 ## Run locally
