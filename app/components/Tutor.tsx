@@ -15,7 +15,8 @@ export default function Tutor({ pathId }: { pathId: string }) {
     const text = question.trim();
     if (!text || busy) return;
 
-    const userMessage: Message = { role: "user", content: text };\n    const nextMessages = [...messages, userMessage].slice(-10);
+    const userMessage: Message = { role: "user", content: text };
+    const nextMessages = [...messages, userMessage].slice(-10);
     setBusy(true);
     setError("");
     setQuestion("");
