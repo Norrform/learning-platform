@@ -29,7 +29,8 @@ export default function Tutor({ pathId }: { pathId: string }) {
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "The tutor is unavailable.");
-      setMessages([...nextMessages, { role: "assistant", content: data.answer }].slice(-10));
+      const assistantMessage: Message = { role: "assistant", content: data.answer };
+      setMessages([...nextMessages, assistantMessage].slice(-10));
     } catch (cause) {
       setQuestion(text);
       setError(cause instanceof Error ? cause.message : "Something went wrong.");
