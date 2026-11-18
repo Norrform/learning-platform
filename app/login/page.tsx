@@ -1,2 +1,20 @@
-import Link from "next/link";import {signIn} from "@/app/auth/actions";
-export default async function LoginPage({searchParams}:{searchParams:Promise<{error?:string;message?:string}>}){const q=await searchParams;return <main className="auth-wrap"><section className="auth-card"><Link className="brand" href="/">✳ learnly<span>.</span></Link><div className="eyebrow" style={{marginTop:28}}>WELCOME BACK</div><h1>Pick up where you left off.</h1><p className="muted">Sign in to continue your learning journey.</p>{q.error&&<p className="error">{q.error}</p>}{q.message&&<p className="success">{q.message}</p>}<form action={signIn}><div className="field"><label htmlFor="email">Email</label><input id="email" name="email" type="email" autoComplete="email" required/></div><div className="field"><label htmlFor="password">Password</label><input id="password" name="password" type="password" autoComplete="current-password" required/></div><button className="button full">Sign in</button></form><p className="muted" style={{fontSize:12,marginTop:18}}><Link className="text-link" href="/forgot-password">Forgot password?</Link></p><p className="muted" style={{fontSize:12}}>New to Learnly? <Link className="text-link" href="/signup">Create an account</Link></p><p className="footer-note">Email confirmation may be required before you can sign in.</p></section></main>}
+import Link from "next/link";
+import { signIn } from "@/app/auth/actions";
+import { AuthShell } from "@/app/components/AuthShell";
+
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string; message?: string }> }) {
+  const q = await searchParams;
+  return (
+    <AuthShell eyebrow="WELCOME BACK" title="Good to have you back." description="Sign in and pick up right where your learning journey left off."
+      footer={<>New to Learnly? <Link className="text-link" href="/signup">Create a free account</Link></>}>
+      {q.error && <p className="error" role="alert">{q.error}</p>}
+      {q.message && <p className="success" role="status">{q.message}</p>}
+      <form action={signIn}>
+        <div className="field"><label htmlFor="email">Email address</label><input id="email" name="email" type="email" autoComplete="email" placeholder="you@example.com" required /></div>
+        <div className="field"><div className="field-label-row"><label htmlFor="password">Password</label><Link className="text-link small-link" href="/forgot-password">Forgot password?</Link></div><input id="password" name="password" type="password" autoComplete="current-password" placeholder="Your password" required /></div>
+        <button className="button full auth-submit">Sign in <span aria-hidden="true">→</span></button>
+      </form>
+      <p className="auth-inline-help">Having trouble confirming your email? <Link className="text-link" href="/check-email">Resend confirmation</Link></p>
+    </AuthShell>
+  );
+}
