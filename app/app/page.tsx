@@ -18,12 +18,13 @@ export default async function Dashboard() {
       ? { id: userId, display_name: metadata.display_name }
       : { id: userId },
     { onConflict: "id" },
-  ).select("display_name,workspace_data").single();
+  ).select("display_name,workspace_data,friend_code").single();
 
   const displayName = profileWrite.data?.display_name?.trim() || preferredName;
   const workspace = profileWrite.data?.workspace_data && typeof profileWrite.data.workspace_data === "object"
     ? profileWrite.data.workspace_data
     : {};
+  const { data: friendConnections } = await supabase.rpc("list_friend_connections");
 
   const { data: paths } = await supabase
     .from("learning_paths")
@@ -44,6 +45,8 @@ export default async function Dashboard() {
     <DashboardWorkspace
       user={{ id: userId, displayName, email }}
       initialWorkspace={workspace}
+      friendCode={profileWrite.data?.friend_code || ""}
+      initialFriends={friendConnections || []}
       paths={paths || []}
       modules={moduleResult.data || []}
       attempts={attemptResult.data || []}
