@@ -39,8 +39,8 @@ export async function POST(request: Request) {
 
   if (action === "send") {
     const friendCode = typeof input.friendCode === "string" ? input.friendCode.trim().toUpperCase() : "";
-    if (!/^[A-F0-9]{8}$/.test(friendCode)) {
-      return NextResponse.json({ error: "Enter a valid 8-character friend code." }, { status: 400 });
+    if (!/^[A-F0-9]{12}$/.test(friendCode)) {
+      return NextResponse.json({ error: "Enter a valid 12-character friend code." }, { status: 400 });
     }
     const { data, error } = await supabase.rpc("send_friend_request", { p_friend_code: friendCode });
     if (error) return NextResponse.json({ error: error.message || "Could not send friend request." }, { status: 400 });
