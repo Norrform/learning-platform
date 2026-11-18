@@ -39,7 +39,7 @@ const catalog = [
 ];
 const emptyWorkspace:Workspace = {notes:[],decks:starterDecks,savedResourceIds:["python","biology","design"],studyTasks:[],projects:[],practiceHistory:[],preferences:{dailyGoalMinutes:30,styleSuggestions:true,reminders:false,progressInsights:true,difficulty:"balanced"}};
 const id = () => crypto.randomUUID();
-const today = () => new Date().toISOString().slice(0,10);
+const today = () => { const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; };
 const dateLabel = (value:string) => value ? new Intl.DateTimeFormat(undefined,{month:"short",day:"numeric"}).format(new Date(value+"T12:00:00")) : "";
 
 const nav = [
@@ -49,7 +49,7 @@ const nav = [
 ];
 
 export default function DashboardWorkspace({user,initialWorkspace,friendCode,initialFriends,paths,modules,attempts,mastery}:Props) {
- const [workspace,setWorkspace]=useState<Workspace>(()=>({...emptyWorkspace,...(initialWorkspace||{}),notes:initialWorkspace?.notes||[],decks:initialWorkspace?.decks?.length?initialWorkspace.decks:starterDecks,savedResourceIds:initialWorkspace?.savedResourceIds||emptyWorkspace.savedResourceIds,studyTasks:initialWorkspace?.studyTasks||[],projects:initialWorkspace?.projects||[],practiceHistory:initialWorkspace?.practiceHistory||[],preferences:{...emptyWorkspace.preferences,...(initialWorkspace?.preferences||{})}}));
+ const [workspace,setWorkspace]=useState<Workspace>(()=>({...emptyWorkspace,...(initialWorkspace||{}),notes:initialWorkspace?.notes||[],decks:Array.isArray(initialWorkspace?.decks)?initialWorkspace.decks:starterDecks,savedResourceIds:initialWorkspace?.savedResourceIds||emptyWorkspace.savedResourceIds,studyTasks:initialWorkspace?.studyTasks||[],projects:initialWorkspace?.projects||[],practiceHistory:initialWorkspace?.practiceHistory||[],preferences:{...emptyWorkspace.preferences,...(initialWorkspace?.preferences||{})}}));
  const [page,setPage]=useState("overview"),[filter,setFilter]=useState("all"),[category,setCategory]=useState("All"),[search,setSearch]=useState("");
  const [deckId,setDeckId]=useState("starter-python"),[cardIndex,setCardIndex]=useState(0),[flipped,setFlipped]=useState(false),[noteId,setNoteId]=useState<string|null>(null);
  const [modal,setModal]=useState(""),[saving,setSaving]=useState("saved"),[mobileOpen,setMobileOpen]=useState(false),[toast,setToast]=useState("");
@@ -57,8 +57,8 @@ export default function DashboardWorkspace({user,initialWorkspace,friendCode,ini
  const [deckForm,setDeckForm]=useState({title:"",subject:"General",front:"",back:""}),[cardForm,setCardForm]=useState({front:"",back:""}),[taskForm,setTaskForm]=useState({title:"",subject:"",date:today(),time:"16:30",durationMinutes:20});
  const [projectForm,setProjectForm]=useState({name:"",topic:"",description:"",stage:"Idea"}),[practiceMode,setPracticeMode]=useState("recall"),[practiceTitle,setPracticeTitle]=useState(""),[practiceText,setPracticeText]=useState(""),[practicePathId,setPracticePathId]=useState("general");
  const [pathForm,setPathForm]=useState({title:"",subject:"",goal:"",current_level:"Beginner",target_level:"Confident understanding"});
- const timer=useRef<ReturnType<typeof setTimeout>|null>(null),first=useRef(true);
- useEffect(()=>{if(first.current){first.current=false;return;}if(timer.current)clearTimeout(timer.current);setSaving("saving");timer.current=setTimeout(async()=>{try{const r=await fetch("/api/workspace",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({workspace})});if(!r.ok)throw new Error();setSaving("saved");}catch{setSaving("error");}},600);return()=>{if(timer.current)clearTimeout(timer.current);};},[workspace]);
+ const timer=useRef<ReturnType<typeof setTimeout>|null>(null),first=useRef(true),saveRevision=useRef(0),saveQueue=useRef<Promise<void>>(Promise.resolve());
+ useEffect(()=>{if(first.current){first.current=false;return;}if(timer.current)clearTimeout(timer.current);const revision=++saveRevision.current;setSaving("saving");const snapshot=workspace;timer.current=setTimeout(()=>{saveQueue.current=saveQueue.current.catch(()=>undefined).then(async()=>{const response=await fetch("/api/workspace",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({workspace:snapshot})});if(!response.ok)throw new Error("Workspace save failed.");if(revision===saveRevision.current)setSaving("saved");}).catch(()=>{if(revision===saveRevision.current)setSaving("error");});},450);return()=>{if(timer.current)clearTimeout(timer.current);};},[workspace]);
  useEffect(()=>{if(!toast)return;const t=setTimeout(()=>setToast(""),2600);return()=>clearTimeout(t);},[toast]);
  const decks=workspace.decks,activeDeck=decks.find(d=>d.id===deckId)||decks[0],activeCard=activeDeck?.cards[cardIndex];
  const currentNote=workspace.notes.find(n=>n.id===noteId)||workspace.notes[0];
@@ -66,7 +66,7 @@ export default function DashboardWorkspace({user,initialWorkspace,friendCode,ini
  const activePaths=paths.filter(p=>p.status!=="completed"&&p.status!=="archived");
  const filteredPaths=paths.filter(p=>filter==="all"||(filter==="completed"?p.status==="completed":p.status!=="completed"&&p.status!=="archived"));
  const completedModules=modules.filter(m=>m.status==="completed").length,mastered=mastery.filter(m=>Number(m.mastery_score)>=80).length;
- const doneTasks=workspace.studyTasks.filter(t=>t.completed),doneMinutes=doneTasks.reduce((n,t)=>n+t.durationMinutes,0),weeklyGoal=workspace.preferences.dailyGoalMinutes*7;
+ const doneTasks=workspace.studyTasks.filter(t=>t.completed),weekStart=(()=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return d;})(),doneMinutes=doneTasks.filter(t=>t.completedAt&&new Date(t.completedAt)>=weekStart).reduce((n,t)=>n+t.durationMinutes,0),weeklyGoal=workspace.preferences.dailyGoalMinutes*7;
  const savedResources=catalog.filter(c=>workspace.savedResourceIds.includes(c.id));
  const titleMap:Record<string,string>={overview:"Overview","my-learning":"My learning",discover:"Discover",flashcards:"Flashcards",practice:"Practice",projects:"Projects",friends:"Friends",groups:"Study groups",community:"Community",schedule:"Study planner",saved:"Saved resources",notes:"My notes",insights:"Insights",settings:"Settings"};
  const update=(fn:(w:Workspace)=>Workspace)=>setWorkspace(w=>fn(w));
