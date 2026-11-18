@@ -26,7 +26,7 @@ function sanitizeWorkspace(value: unknown): Workspace | null {
     subject: text(item.subject, 80, "General"),
     cards: list(item.cards).slice(0, 100).filter(isRecord).map((card) => ({
       id: text(card.id, 80), front: text(card.front, 500), back: text(card.back, 1500),
-      rating: text(card.rating, 20),
+      rating: text(card.rating, 20), dueAt: text(card.dueAt, 40), lastReviewedAt: text(card.lastReviewedAt, 40), reviewCount: Math.max(0, Math.min(100000, Number(card.reviewCount) || 0)),
     })).filter((card) => card.id && card.front && card.back),
   })).filter((item) => item.id);
   const studyTasks = list(value.studyTasks).slice(0, 200).filter(isRecord).map((item) => ({
