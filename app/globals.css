@@ -279,3 +279,5 @@
 .workspace-friend-actions{display:flex;gap:6px}.workspace-friend-actions .workspace-button{padding:7px 10px;font-size:10px}
 .workspace-friend-pending{font-size:10px;color:#9b8b55;background:#fbf5df;padding:6px 9px;border-radius:8px}
 @media(max-width:760px){.workspace-friends-grid{grid-template-columns:1fr}.workspace-add-friend{align-items:stretch;flex-direction:column}.workspace-add-friend .workspace-button{width:100%}.workspace-friend-row{flex-wrap:wrap}.workspace-friend-actions{width:100%;padding-left:47px}.workspace-friend-actions .workspace-button{flex:1}}
+
+.workspace-code-value{font-size:24px;letter-spacing:3px;overflow-wrap:anywhere}
