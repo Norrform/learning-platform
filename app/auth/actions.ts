@@ -3,21 +3,23 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://learnly-learning-demo-git-build-nextjs-foundation-norrform.vercel.app";
-const callbackUrl = (next: string) => `${SITE_URL}/auth/callback?next=${encodeURIComponent(next)}`;
-
 function safeError(error: { message: string }) {
   const message = error.message.toLowerCase();
   if (message.includes("invalid login credentials")) return "That email and password combination did not work. Check them and try again.";
-  if (message.includes("email not confirmed")) return "Please confirm your email first. Check your inbox or request a new confirmation email.";
+  if (message.includes("email not confirmed")) return "Please verify your email with the six-digit code first.";
   if (message.includes("user already registered")) return "An account with this email already exists. Try signing in instead.";
   if (message.includes("password")) return "Please choose a password with at least 8 characters.";
   if (message.includes("rate limit")) return "Too many attempts in a short time. Wait a little and try again.";
+  if (message.includes("token") || message.includes("otp")) return "That code is invalid or has expired. Request a fresh code and try again.";
   return "Something went wrong. Please try again in a moment.";
 }
 
+function emailValue(formData: FormData) {
+  return String(formData.get("email") || "").trim().toLowerCase();
+}
+
 export async function signIn(formData: FormData) {
-  const email = String(formData.get("email") || "").trim().toLowerCase();
+  const email = emailValue(formData);
   const password = String(formData.get("password") || "");
   if (!email || !password) redirect("/login?error=Enter%20your%20email%20and%20password.");
   const supabase = await createClient();
@@ -26,8 +28,20 @@ export async function signIn(formData: FormData) {
   redirect("/app");
 }
 
+export async function requestSignInCode(formData: FormData) {
+  const email = emailValue(formData);
+  if (!email || !email.includes("@")) redirect("/login?error=Enter%20a%20valid%20email%20address.");
+  const supabase = await createClient();
+  const { error } = await supabase.auth.signInWithOtp({
+    email,
+    options: { shouldCreateUser: false },
+  });
+  if (error) redirect("/login?error=" + encodeURIComponent(safeError(error)));
+  redirect("/verify-code?type=login&email=" + encodeURIComponent(email));
+}
+
 export async function signUp(formData: FormData) {
-  const email = String(formData.get("email") || "").trim().toLowerCase();
+  const email = emailValue(formData);
   const password = String(formData.get("password") || "");
   const displayName = String(formData.get("displayName") || "").trim().slice(0, 60);
   if (!email || !email.includes("@") || password.length < 8) {
@@ -37,32 +51,51 @@ export async function signUp(formData: FormData) {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
-    options: {
-      data: { display_name: displayName },
-      emailRedirectTo: callbackUrl("/app"),
-    },
+    options: { data: { display_name: displayName } },
   });
   if (error) redirect("/signup?error=" + encodeURIComponent(safeError(error)));
   if (data.session) redirect("/app");
-  redirect("/check-email");
+  redirect("/verify-code?type=signup&email=" + encodeURIComponent(email));
 }
 
-export async function resendConfirmation(formData: FormData) {
-  const email = String(formData.get("email") || "").trim().toLowerCase();
-  if (!email || !email.includes("@")) redirect("/check-email?error=" + encodeURIComponent("Enter a valid email address."));
+export async function verifyEmailCode(formData: FormData) {
+  const email = emailValue(formData);
+  const token = String(formData.get("token") || "").replace(/\\s/g, "");
+  const type = String(formData.get("type") || "");
+  if (!email || !/^\\d{6}$/.test(token) || !["signup", "login"].includes(type)) {
+    redirect("/verify-code?error=" + encodeURIComponent("Enter the six-digit code from your email.") + "&type=" + encodeURIComponent(type) + "&email=" + encodeURIComponent(email));
+  }
   const supabase = await createClient();
-  const { error } = await supabase.auth.resend({ type: "signup", email, options: { emailRedirectTo: callbackUrl("/app") } });
-  if (error) redirect("/check-email?error=" + encodeURIComponent(safeError(error)));
-  redirect("/check-email?message=" + encodeURIComponent("If that account is waiting for confirmation, a fresh email is on its way."));
+  const { error } = await supabase.auth.verifyOtp({
+    email,
+    token,
+    type: type === "signup" ? "signup" : "email",
+  });
+  if (error) redirect("/verify-code?error=" + encodeURIComponent(safeError(error)) + "&type=" + type + "&email=" + encodeURIComponent(email));
+  redirect("/app");
+}
+
+export async function resendEmailCode(formData: FormData) {
+  const email = emailValue(formData);
+  const type = String(formData.get("type") || "");
+  if (!email || !email.includes("@") || !["signup", "login"].includes(type)) {
+    redirect("/verify-code?error=Enter%20a%20valid%20email%20address.");
+  }
+  const supabase = await createClient();
+  const result = type === "signup"
+    ? await supabase.auth.resend({ type: "signup", email })
+    : await supabase.auth.signInWithOtp({ email, options: { shouldCreateUser: false } });
+  if (result.error) redirect("/verify-code?error=" + encodeURIComponent(safeError(result.error)) + "&type=" + type + "&email=" + encodeURIComponent(email));
+  redirect("/verify-code?message=" + encodeURIComponent("A fresh six-digit code has been sent.") + "&type=" + type + "&email=" + encodeURIComponent(email));
 }
 
 export async function requestPasswordReset(formData: FormData) {
-  const email = String(formData.get("email") || "").trim().toLowerCase();
+  const email = emailValue(formData);
   if (!email) redirect("/forgot-password?error=Enter%20your%20email.");
   const supabase = await createClient();
-  const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: callbackUrl("/reset-password") });
+  const { error } = await supabase.auth.resetPasswordForEmail(email);
   if (error) redirect("/forgot-password?error=" + encodeURIComponent(safeError(error)));
-  redirect("/forgot-password?message=" + encodeURIComponent("If an account matches that email, a password reset link is on its way. Check your spam folder too."));
+  redirect("/forgot-password?message=" + encodeURIComponent("If an account matches that email, a password reset email is on its way. Check your spam folder too."));
 }
 
 export async function updatePassword(formData: FormData) {
