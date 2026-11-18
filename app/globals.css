@@ -235,3 +235,47 @@
 @media(max-width:1050px){.workspace-columns{grid-template-columns:1fr}.workspace-project-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.workspace-practice-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:760px){.workspace-sidebar{transform:translateX(-105%);transition:transform .2s;box-shadow:10px 0 30px #24224b12}.workspace-sidebar.open{transform:translateX(0)}.workspace-mobile-scrim{display:block;position:fixed;inset:0;z-index:25;border:0;background:#19172b55}.workspace-main{width:100%;margin-left:0}.workspace-mobile-menu{display:block;border:1px solid #ececf3;background:#fff;border-radius:8px;padding:6px 9px;color:#666}.workspace-topbar{height:58px;padding:0 14px}.workspace-top-user{display:none}.workspace-page-wrap{padding:22px 14px}.workspace-welcome-row,.workspace-page-title{align-items:flex-start;flex-direction:column}.workspace-stats{grid-template-columns:1fr 1fr}.workspace-hero{grid-template-columns:1fr;padding:25px 22px;min-height:220px}.workspace-hero-art{position:absolute;right:-80px;bottom:-30px;width:260px;opacity:.35}.workspace-hero>div:first-child{position:relative;z-index:2}.workspace-discovery-grid,.workspace-discovery-grid.large{grid-template-columns:1fr 1fr}.workspace-learning-grid{grid-template-columns:1fr}.workspace-flash-layout{grid-template-columns:1fr}.workspace-project-grid{grid-template-columns:1fr 1fr}.workspace-notes-layout{grid-template-columns:1fr}.workspace-note-list{max-height:180px;overflow:auto}.workspace-planner-summary{grid-template-columns:1fr 1fr}.workspace-footer{margin:0 14px;flex-wrap:wrap}.workspace-save-state{display:none}}
 @media(max-width:480px){.workspace-breadcrumb{font-size:9px}.workspace-top-actions{gap:6px}.workspace-icon-button{width:30px;height:30px}.workspace-page-title .workspace-button{align-self:stretch}.workspace-discovery-grid,.workspace-discovery-grid.large{grid-template-columns:1fr}.workspace-project-grid,.workspace-practice-grid{grid-template-columns:1fr}.workspace-learning-card{grid-template-columns:82px minmax(0,1fr)}.workspace-learning-foot{flex-direction:column}.workspace-task-row{gap:7px;flex-wrap:wrap}.workspace-task-date{min-width:75px}.workspace-modal{padding:17px}.workspace-modal-row{grid-template-columns:1fr}.workspace-footer>span:nth-child(2){display:none}}
+
+
+/* Dashboard readability and Friends */
+.workspace-nav-item{font-size:12px}
+.workspace-nav-label{font-size:10px}
+.workspace-switcher b,.workspace-sidebar-user b{font-size:12px}
+.workspace-switcher small,.workspace-sidebar-user small{font-size:10px}
+.workspace-stats small,.workspace-stats em{font-size:10px}
+.workspace-card-heading p,.workspace-section-heading p,.workspace-welcome-row p,.workspace-page-title p{font-size:11px}
+.workspace-course-row b{font-size:12px}.workspace-course-row small{font-size:10px}
+.workspace-discover-card small{font-size:10px}.workspace-discover-card b{font-size:12px}.workspace-discover-card p{font-size:10px}
+.workspace-learning-card-body>small{font-size:10px}.workspace-learning-card h3{font-size:14px}.workspace-learning-card p{font-size:10px}.workspace-learning-foot{font-size:9px}
+.workspace-tabs button,.workspace-categories button{font-size:10px}
+.workspace-search input{font-size:12px}
+.workspace-pill{font-size:9px}
+.workspace-flashcard small{font-size:10px}.workspace-flashcard em{font-size:10px}
+.workspace-rating span,.workspace-rating button{font-size:10px}
+.workspace-deck-list>button b{font-size:11px}.workspace-deck-list>button small,.workspace-deck-list>p{font-size:10px}
+.workspace-practice-grid b{font-size:12px}.workspace-practice-grid small,.workspace-practice-grid em{font-size:10px}
+.workspace-history-row b{font-size:11px}.workspace-history-row small,.workspace-history-row p{font-size:10px}
+.workspace-task-date,.workspace-task-copy small{font-size:10px}.workspace-task-copy b{font-size:11px}
+.workspace-saved-row b{font-size:11px}.workspace-saved-row small{font-size:10px}
+.workspace-note-list>button b{font-size:11px}.workspace-note-list>button small{font-size:10px}
+.workspace-note-editor>small{font-size:10px}.workspace-note-editor>textarea{font-size:12px}
+.workspace-settings>p,.workspace-settings label small,.workspace-settings label b{font-size:10px}
+.workspace-modal-form label{font-size:11px}.workspace-modal-form input,.workspace-modal-form textarea,.workspace-modal-form select{font-size:12px}
+.workspace-modal-hint,.workspace-save-note{font-size:10px}
+.workspace-empty{font-size:11px}
+.workspace-social-notice p{font-size:11px}
+.workspace-friends-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:14px}
+.workspace-code-value{font:800 28px/1.3 Manrope,sans-serif;letter-spacing:5px;text-align:center;color:#5548bb;background:#f5f3ff;border:1px dashed #d9d2ff;border-radius:11px;padding:17px;margin:12px 0}
+.workspace-friend-privacy{font-size:10px;line-height:1.6;color:#85899d;margin:10px 0 0}
+.workspace-add-friend{display:flex;gap:8px;align-items:center;margin-top:16px}
+.workspace-add-friend input{height:40px;min-width:0;flex:1;border:1px solid #e7e5ef;border-radius:9px;padding:0 11px;font:700 13px Manrope;letter-spacing:1px;text-transform:uppercase;outline:none}
+.workspace-add-friend input:focus{border-color:#8b7ae0;box-shadow:0 0 0 3px #7665d817}
+.workspace-friend-section{margin-top:13px}
+.workspace-friend-row{display:flex;align-items:center;gap:11px;padding:12px 0;border-top:1px solid #f1f1f5}
+.workspace-friend-avatar{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;flex:none;background:#eeeaff;color:#6a5cc7;font:800 13px Manrope}
+.workspace-friend-row>div:nth-child(2){flex:1;min-width:0}
+.workspace-friend-row b,.workspace-friend-row small{display:block}
+.workspace-friend-row b{font-size:12px}.workspace-friend-row small{font-size:10px;color:#85899d;margin-top:3px}
+.workspace-friend-actions{display:flex;gap:6px}.workspace-friend-actions .workspace-button{padding:7px 10px;font-size:10px}
+.workspace-friend-pending{font-size:10px;color:#9b8b55;background:#fbf5df;padding:6px 9px;border-radius:8px}
+@media(max-width:760px){.workspace-friends-grid{grid-template-columns:1fr}.workspace-add-friend{align-items:stretch;flex-direction:column}.workspace-add-friend .workspace-button{width:100%}.workspace-friend-row{flex-wrap:wrap}.workspace-friend-actions{width:100%;padding-left:47px}.workspace-friend-actions .workspace-button{flex:1}}
