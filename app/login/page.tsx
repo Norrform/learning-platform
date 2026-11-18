@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { signIn } from "@/app/auth/actions";
+import { requestSignInCode, signIn } from "@/app/auth/actions";
 import { AuthShell } from "@/app/components/AuthShell";
 
 export default async function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string; message?: string }> }) {
@@ -12,9 +12,13 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
       <form action={signIn}>
         <div className="field"><label htmlFor="email">Email address</label><input id="email" name="email" type="email" autoComplete="email" placeholder="you@example.com" required /></div>
         <div className="field"><div className="field-label-row"><label htmlFor="password">Password</label><Link className="text-link small-link" href="/forgot-password">Forgot password?</Link></div><input id="password" name="password" type="password" autoComplete="current-password" placeholder="Your password" required /></div>
-        <button className="button full auth-submit">Sign in <span aria-hidden="true">→</span></button>
+        <button className="button full auth-submit">Sign in with password <span aria-hidden="true">→</span></button>
       </form>
-      <p className="auth-inline-help">Having trouble confirming your email? <Link className="text-link" href="/check-email">Resend confirmation</Link></p>
+      <div className="auth-or"><span>OR</span></div>
+      <form action={requestSignInCode}>
+        <div className="field"><label htmlFor="code-email">Sign in with an email code</label><input id="code-email" name="email" type="email" autoComplete="email" placeholder="you@example.com" required /></div>
+        <button className="button full auth-code-button">Email me a six-digit code <span aria-hidden="true">✉</span></button>
+      </form>
     </AuthShell>
   );
 }
