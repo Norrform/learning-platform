@@ -281,3 +281,18 @@
 @media(max-width:760px){.workspace-friends-grid{grid-template-columns:1fr}.workspace-add-friend{align-items:stretch;flex-direction:column}.workspace-add-friend .workspace-button{width:100%}.workspace-friend-row{flex-wrap:wrap}.workspace-friend-actions{width:100%;padding-left:47px}.workspace-friend-actions .workspace-button{flex:1}}
 
 .workspace-code-value{font-size:24px;letter-spacing:3px;overflow-wrap:anywhere}
+
+
+.workspace-group-select{display:flex;flex-direction:column;gap:4px;width:100%;padding:11px 12px;margin-top:7px;text-align:left;border:1px solid #ececf3;border-radius:9px;background:#fff;cursor:pointer}
+.workspace-group-select.selected{background:#f5f3ff;border-color:#dcd5ff}
+.workspace-group-select b{font-size:12px;color:#34324c}
+.workspace-group-select small{font-size:10px;color:#85899d}
+.workspace-group-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 22px}
+.workspace-group-notes-heading{padding-top:16px;border-top:1px solid #f0eff5}
+.workspace-group-note{padding:13px 0;border-top:1px solid #f0eff5}
+.workspace-group-note>div{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.workspace-group-note b{font-size:12px}
+.workspace-group-note small{font-size:10px;color:#9293a3}
+.workspace-group-note p{font-size:11px;line-height:1.7;color:#626579;white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0}
+.workspace-group-select:focus-visible,.workspace-group-actions button:focus-visible{outline:3px solid #a79bed;outline-offset:2px}
+@media(max-width:760px){.workspace-group-actions{flex-direction:column}.workspace-group-actions button{width:100%}.workspace-group-note>div{align-items:flex-start;flex-direction:column;gap:3px}}
