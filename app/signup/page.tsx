@@ -14,7 +14,7 @@ export default async function SignupPage({ searchParams }: { searchParams: Promi
         <div className="field"><label htmlFor="password">Create a password</label><input id="password" name="password" type="password" minLength={8} autoComplete="new-password" placeholder="At least 8 characters" required /><p className="field-hint">Use at least 8 characters. A unique password is best.</p></div>
         <button className="button full auth-submit">Create my account <span aria-hidden="true">→</span></button>
       </form>
-      <p className="auth-inline-help">After signing up, we’ll email you a confirmation link before your first sign-in.</p>
+      <p className="auth-inline-help">We’ll send a six-digit verification code to your email. Enter it to activate your account.</p>
     </AuthShell>
   );
 }
