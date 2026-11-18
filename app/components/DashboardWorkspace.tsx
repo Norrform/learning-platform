@@ -1,0 +1,1 @@
+export default function DashboardWorkspace() { return <main>Learnly dashboard</main>; }
