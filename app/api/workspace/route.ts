@@ -44,6 +44,7 @@ function sanitizeWorkspace(value: unknown): Workspace | null {
   const practiceHistory = list(value.practiceHistory).slice(0, 200).filter(isRecord).map((item) => ({
     id: text(item.id, 80), mode: text(item.mode, 30), title: text(item.title, 160),
     reflection: text(item.reflection, 5000), createdAt: text(item.createdAt, 40, new Date().toISOString()),
+    learningPathId: text(item.learningPathId, 80), courseTitle: text(item.courseTitle, 120),
   })).filter((item) => item.id);
   const preferences = isRecord(value.preferences) ? value.preferences : {};
   const goal = Number(preferences.dailyGoalMinutes);
